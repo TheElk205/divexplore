@@ -199,3 +199,8 @@ backend/output
 middleware/Node/local-config.js
 middleware/Node/node_modules
 middleware/Node/vbsqueryserverlog.json
+
+
+testvideos
+
+**/*.mp4
