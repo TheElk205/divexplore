@@ -17,7 +17,7 @@ print("Model loaded successfully.")
 # Frame extraction
 def extract_frames(video_path, interval=1):
     cap = cv2.VideoCapture(video_path)
-    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    fps = cap.get(cv2.CAP_PROP_FPS)
     frames = []
     count = 0
     prevFrame = None

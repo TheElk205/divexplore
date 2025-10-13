@@ -17,7 +17,7 @@ def append_video_fps(video_path):
         print(f"Error: Unable to open video file - {video_path}")
         return
 
-    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    fps = cap.get(cv2.CAP_PROP_FPS)
     cap.release()
 
     # Ensure output directory exists
