@@ -378,7 +378,7 @@ function parseParameters(inputString) {
 function connectToDefaultCLIPServer() {
   let dataset = "default";
   try {
-    console.log("trying to connect to CLIP " + dataset + " ...");
+    console.log("trying to connect to CLIP " + dataset + " on " + CLIPSERVERURLDEFAULT + "...");
     clipWebSocketDefault = new WebSocket(CLIPSERVERURLDEFAULT);
     clipWebSocketDefault.on("open", () => {
       console.log("connected to CLIP " + dataset + " server");
