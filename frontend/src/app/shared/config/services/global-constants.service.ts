@@ -22,6 +22,11 @@ export class GlobalConstantsService {
     return `ws://${config.config_CLIP_SERVER_HOST}:${config.config_CLIP_SERVER_PORT}`;
   }
 
+  get querySuggestionServerURL(): string {
+    const config = this.configService.getConfiguration();
+    return `ws://${config.config_query_suggestion_SERVER_HOST}:${config.config_query_suggestion_SERVER_PORT}`;
+  }
+
   get nodeServerURL(): string {
     const config = this.configService.getConfiguration();
     return `ws://${config.config_NODE_SERVER_HOST}:${config.config_NODE_SERVER_PORT}`;

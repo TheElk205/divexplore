@@ -1,6 +1,6 @@
 export class LocalConfig {
     public static config_CLIP_SERVER_HOST = 'localhost';
-    public static config_CLIP_SERVER_PORT = '8002';
+    public static config_CLIP_SERVER_PORT = '8010';
 
     public static config_NODE_SERVER_HOST = 'localhost';
     public static config_NODE_SERVER_PORT = '8080';

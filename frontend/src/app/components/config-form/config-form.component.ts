@@ -16,6 +16,8 @@ export class ConfigFormComponent implements OnInit {
     this.configForm = this.formBuilder.group({
       config_CLIP_SERVER_HOST: '',
       config_CLIP_SERVER_PORT: '',
+      config_query_suggestion_SERVER_HOST: '',
+      config_query_suggestion_SERVER_PORT: '',
       config_NODE_SERVER_HOST: '',
       config_NODE_SERVER_PORT: '',
       config_DATA_BASE_URL: '',

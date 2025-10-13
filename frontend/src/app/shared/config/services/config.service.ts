@@ -20,11 +20,14 @@ export class ConfigService {
     console.log('Loaded config:', this.config); // Debugging statement
   }
 
-
   private getDefaultConfig() {
     return {
       config_CLIP_SERVER_HOST: LocalConfig.config_CLIP_SERVER_HOST,
       config_CLIP_SERVER_PORT: LocalConfig.config_CLIP_SERVER_PORT,
+
+      config_query_suggestion_SERVER_HOST: LocalConfig.config_query_suggestion_SERVER_HOST,
+      config_query_suggestion_SERVER_PORT: LocalConfig.config_query_suggestion_SERVER_PORT,
+
       config_NODE_SERVER_HOST: LocalConfig.config_NODE_SERVER_HOST,
       config_NODE_SERVER_PORT: LocalConfig.config_NODE_SERVER_PORT,
       config_DATA_BASE_URL: LocalConfig.config_DATA_BASE_URL,

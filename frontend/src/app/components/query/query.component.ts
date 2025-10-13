@@ -13,6 +13,7 @@ import { MessageBarComponent } from '../message-bar/message-bar.component';
 import { Subscription } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { UrlRetrievalService } from 'src/app/services/url-retrieval/url-retrieval.service';
+import { QuerySuggestionConnectionService } from 'src/app/services/query-suggestion-service/query-suggestion.service';
 
 interface Shot {
   keyframe: string;
@@ -139,6 +140,7 @@ export class QueryComponent implements AfterViewInit, VbsServiceCommunication {
   file_sim_pathPrefix: string | undefined;
   file_sim_page: string = "1";
   nodeServerInfo: string | undefined;
+  querySuggegstion: string | undefined;
   isSimilarityQuery = false;
 
   // Display ratios and base URLs
@@ -174,6 +176,7 @@ export class QueryComponent implements AfterViewInit, VbsServiceCommunication {
     public vbsService: VBSServerConnectionService,
     public nodeService: NodeServerConnectionService,
     public clipService: ClipServerConnectionService,
+    public querySuggestionService: QuerySuggestionConnectionService,
     public urlRetrievalService: UrlRetrievalService,
     private renderer: Renderer2,
     private titleService: Title,
@@ -237,6 +240,11 @@ export class QueryComponent implements AfterViewInit, VbsServiceCommunication {
     } else {
       console.log('qc: node-service not connected yet');
     }
+
+    this.querySuggestionService.messages.subscribe(msg => {
+      let m = JSON.parse(JSON.stringify(msg));
+      this.querySuggegstion = m["suggestion"]
+    })
 
     this.nodeService.messages.subscribe(msg => {
       this.nodeServerInfo = undefined;
@@ -1192,6 +1200,7 @@ export class QueryComponent implements AfterViewInit, VbsServiceCommunication {
       this.nodeService.connectionState === WSServerStatus.CONNECTED) {
 
       this.nodeServerInfo = "processing query, please wait...";
+      this.querySuggegstion = "Waiting for suggestion...."
 
       if (this.previousQuery !== undefined && this.previousQuery.type === 'textquery' && this.previousQuery.query !== this.queryinput) {
         this.selectedPage = '1';
@@ -1222,6 +1231,7 @@ export class QueryComponent implements AfterViewInit, VbsServiceCommunication {
         this.queryType = 'database/joint';
         console.log('qc: send to node-server: ' + msg);
         this.sendToNodeServer(msg);
+
       } else {
         this.queryType = 'CLIP';
         this.sendToCLIPServer(msg);
@@ -1231,6 +1241,14 @@ export class QueryComponent implements AfterViewInit, VbsServiceCommunication {
         this.saveToHistory(msg);
       }
 
+      if (this.querySuggestionService.connectionState === WSServerStatus.CONNECTED) {
+        console.log("Sending to query suggestion service: ", msg)
+        this.sendToQuerySuggestionServer(msg);
+      }
+      else {
+        console.error("Query suggestion not connected")
+      }
+      
       //query event logging
       let queryEvent: QueryEvent = {
         timestamp: Date.now(),
@@ -1390,6 +1408,14 @@ export class QueryComponent implements AfterViewInit, VbsServiceCommunication {
       content: msg
     };
     this.nodeService.messages.next(message);
+  }
+
+  sendToQuerySuggestionServer(msg: any) {
+     let message = {
+      source: 'appcomponent',
+      content: msg
+    };
+    this.querySuggestionService.messages.next(message);
   }
 
 

@@ -221,6 +221,11 @@
   <button (click)="nodeServerInfo = undefined">Close</button>
 </div>
 
+<div *ngIf="querySuggegstion !== undefined" class="full-message">
+  {{querySuggegstion}}
+  <button (click)="querySuggegstion = undefined">Close</button>
+</div>
+
 <app-help-section *ngIf="showHelpActive" (clickOnClose)="showHelpActive = false"></app-help-section>
 
 <app-history-dialog *ngIf="showHistoryActive" (clickOnClose)="showHistoryActive = false"
