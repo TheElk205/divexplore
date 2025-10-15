@@ -38,6 +38,7 @@ export class ConfigService {
       config_MAX_RESULTS_TO_RETURN: 35 * 40,
       config_IMAGE_WIDTH: 236,
       config_SHOW_SUBMITTED_FRAMES: true,
+      config_IMAGE_FILE_EXTENSION: 'png',
       config_EXPLORE_RESULTS_PER_LOAD: 15,
       config_SHOTS_RESULTS_PER_LOAD: 40
       // ... add other default values
